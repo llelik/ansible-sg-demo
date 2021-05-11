@@ -1,0 +1,9 @@
+changed: 'False'
+failed: false
+sg_info:
+    grid/domain-names:
+        apiVersion: '3.3'
+        data:
+        - ddd.com
+        responseTime: '2021-04-22T11:10:28.559Z'
+        status: success

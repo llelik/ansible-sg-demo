@@ -1,0 +1,57 @@
+---
+
+- hosts: localhost
+  collections:
+    - netapp.storagegrid
+  vars_files:
+    vars/defaults.yml
+
+  gather_facts: no
+  tasks:
+  - name: Retrieve SG auth token
+    uri:
+      url: "{{ sgadmin_url }}/api/v3/authorize"
+      method: POST
+      body: {
+        "username": "{{ sgadmin_user }}",
+        "password": "{{ sgadmin_pwd }}",
+        "cookie": false,
+        "csrfToken": false
+      }
+      body_format: json
+      validate_certs: false
+    register: gridauth
+    tags: gridauth
+
+  - name: Gather facts from GRID
+    netapp.storagegrid.na_sg_grid_info:
+      api_url: "{{ sgadmin_url }}"
+      auth_token: "{{ gridauth.json.data }}"
+      validate_certs: false
+      gather_subset:
+        - grid/domain-names 
+    register: grid_domain_info
+
+  - name: Save GRID facts to YAML file
+    delegate_to: localhost
+    copy:
+      content: "{{ grid_domain_info | to_nice_yaml }}"
+      dest: "./grid_sg_net_facts.yml"
+  
+  - name: Merge list of domains
+    set_fact:
+      new_domain_list: "{{ (grid_domain_info['sg_info']['grid/domain-names'].data + [newdomain] ) |unique|list }}"
+
+  - name: Add a new domain via REST API call
+    uri:
+      url: "{{ sgadmin_url }}/api/v3/grid/domain-names"
+      method: PUT
+      body_format: json
+      headers:
+        Authorization: "{{ gridauth.json.data }}"
+      body:  "{{ new_domain_list }}" 
+      validate_certs: false
+    register: net_response
+    tags: netadd
+    when: newdomain not in grid_domain_info['sg_info']['grid/domain-names'].data
+...

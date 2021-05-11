@@ -1,0 +1,210 @@
+changed: 'False'
+failed: false
+sg_info:
+    org/compliance-global:
+        apiVersion: '3.3'
+        data:
+            complianceEnabled: false
+        responseTime: '2021-04-21T21:03:12.929Z'
+        status: success
+    org/config:
+        apiVersion: '3.3'
+        data:
+            account:
+                capabilities:
+                - s3
+                - management
+                id: '82316967111707306924'
+                name: it-dept
+                policy:
+                    allowPlatformServices: false
+                    quotaObjectBytes: 107374182400
+                    useAccountIdentitySource: false
+            auto-logout: 900
+            deactivatedFeatures: {}
+            permissions:
+                rootAccess: true
+            restrictedPort: false
+            token:
+                expires: '2021-04-22T13:03:06.000Z'
+            user:
+                federated: false
+                firstName: Root
+                fullName: Root
+                id: 00000000-0000-0000-0000-000000000000
+                uniqueName: root
+                username: root
+        responseTime: '2021-04-21T21:03:12.973Z'
+        status: success
+    org/config/product-version:
+        apiVersion: '3.3'
+        data:
+            productVersion: 11.5.0-20210308.2018.28b1420
+        responseTime: '2021-04-21T21:03:13.087Z'
+        status: success
+    org/containers:
+        apiVersion: '3.3'
+        data:
+        -   creationTime: '2021-04-21T20:39:31.873Z'
+            name: it-bucket1
+        responseTime: '2021-04-21T21:03:13.178Z'
+        status: success
+    org/deactivated-features:
+        apiVersion: '3.3'
+        data: {}
+        responseTime: '2021-04-21T21:03:13.242Z'
+        status: success
+    org/endpoints:
+        apiVersion: '3.3'
+        data: []
+        responseTime: '2021-04-21T21:03:13.317Z'
+        status: success
+    org/groups:
+        apiVersion: '3.3'
+        data:
+        -   accountId: '82316967111707306924'
+            displayName: IT-management
+            federated: false
+            groupURN: urn:sgws:identity::82316967111707306924:group/it-mgmt
+            id: d07c69c6-8539-44e5-9169-55b7a9cedc84
+            managementReadOnly: false
+            policies:
+                management:
+                    manageAllContainers: true
+                    manageEndpoints: true
+                    manageOwnS3Credentials: true
+                s3:
+                    Statement:
+                    -   Action: s3:*
+                        Effect: Allow
+                        Resource: arn:aws:s3:::*
+            uniqueName: group/it-mgmt
+        -   accountId: '82316967111707306924'
+            displayName: IT-workforce
+            federated: false
+            groupURN: urn:sgws:identity::82316967111707306924:group/it-workforce
+            id: e314aa60-62ec-49d4-ad0b-00ae3b7626ba
+            managementReadOnly: false
+            policies:
+                management:
+                    manageAllContainers: true
+                    manageEndpoints: true
+                    manageOwnS3Credentials: true
+                s3:
+                    Statement:
+                    -   Action: s3:*
+                        Effect: Allow
+                        Resource: arn:aws:s3:::*
+            uniqueName: group/it-workforce
+        responseTime: '2021-04-21T21:03:13.360Z'
+        status: success
+    org/identity-source:
+        apiVersion: '3.3'
+        data:
+            baseGroupDn: ''
+            baseUserDn: ''
+            caCert: ''
+            disable: true
+            disableTLS: false
+            enableLDAPS: false
+            hostname: ''
+            id: 42809c0e-7a63-475e-bcb1-004ddfdd49b7
+            ldapServiceType: ''
+            password: null
+            port: 0
+            type: ''
+            username: ''
+        responseTime: '2021-04-21T21:03:13.437Z'
+        status: success
+    org/regions:
+        apiVersion: '3.3'
+        data:
+        - us-east-1
+        responseTime: '2021-04-21T21:03:13.504Z'
+        status: success
+    org/usage:
+        apiVersion: '3.3'
+        data:
+            buckets:
+            -   dataBytes: 0
+                name: it-bucket1
+                objectCount: 0
+            calculationTime: '2021-04-21T21:02:15.887000Z'
+            dataBytes: 0
+            objectCount: 0
+        responseTime: '2021-04-21T21:03:13.555Z'
+        status: success
+    org/users:
+        apiVersion: '3.3'
+        data:
+        -   accountId: '82316967111707306924'
+            disable: false
+            federated: false
+            fullName: Root
+            id: 00000000-0000-0000-0000-000000000000
+            memberOf: null
+            uniqueName: root
+            userURN: urn:sgws:identity::82316967111707306924:root
+        -   accountId: '82316967111707306924'
+            disable: false
+            federated: false
+            fullName: Boss
+            id: a083cdda-d6d0-4aa0-bb23-e6192efbcf79
+            memberOf:
+            - d07c69c6-8539-44e5-9169-55b7a9cedc84
+            uniqueName: user/Boss
+            userURN: urn:sgws:identity::82316967111707306924:user/Boss
+        -   accountId: '82316967111707306924'
+            disable: false
+            federated: false
+            fullName: coder1
+            id: 7ebb7bec-9401-4a95-b80c-3c7a1f11065f
+            memberOf:
+            - e314aa60-62ec-49d4-ad0b-00ae3b7626ba
+            uniqueName: user/coder1
+            userURN: urn:sgws:identity::82316967111707306924:user/coder1
+        -   accountId: '82316967111707306924'
+            disable: false
+            federated: false
+            fullName: coder2
+            id: 61c72743-36c1-45c9-84a0-c2c1f1f9202e
+            memberOf:
+            - e314aa60-62ec-49d4-ad0b-00ae3b7626ba
+            uniqueName: user/coder2
+            userURN: urn:sgws:identity::82316967111707306924:user/coder2
+        -   accountId: '82316967111707306924'
+            disable: false
+            federated: false
+            fullName: devops-eng
+            id: 99517ca5-0da2-4fee-ab51-938b86139f14
+            memberOf:
+            - d07c69c6-8539-44e5-9169-55b7a9cedc84
+            uniqueName: user/devops-eng
+            userURN: urn:sgws:identity::82316967111707306924:user/devops-eng
+        responseTime: '2021-04-21T21:03:13.595Z'
+        status: success
+    org/users/current-user/s3-access-keys:
+        apiVersion: '3.3'
+        data: []
+        responseTime: '2021-04-21T21:03:13.641Z'
+        status: success
+    org/users/root:
+        apiVersion: '3.3'
+        data:
+            accountId: '82316967111707306924'
+            disable: false
+            federated: false
+            fullName: Root
+            id: 00000000-0000-0000-0000-000000000000
+            memberOf: null
+            uniqueName: root
+            userURN: urn:sgws:identity::82316967111707306924:root
+        responseTime: '2021-04-21T21:03:13.680Z'
+        status: success
+    versions:
+        apiVersion: '3.3'
+        data:
+        - 2
+        - 3
+        responseTime: '2021-04-21T21:03:13.697Z'
+        status: success

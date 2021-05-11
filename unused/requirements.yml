@@ -1,0 +1,6 @@
+---
+collections:
+  - name: netapp.storagegrid
+    version: latest
+    source: https://galaxy.ansible.com
+  

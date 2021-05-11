@@ -1,0 +1,37 @@
+---
+- hosts: localhost
+  gather_facts: no
+  collections:
+    - netapp.storagegrid
+  tasks:
+  - name: Retrieve SG auth token
+    uri:
+      url: "http://172.30.171.140/api/v3/authorize"
+      method: POST
+      body: {
+          "username": "{{ root }}",
+          "password": "{{ netapp01 }}",
+          "cookie": false,
+          "csrfToken": false
+         }
+      body_format: json
+      validate_certs: false
+    register: gridauth
+    tags: gridauth
+
+
+
+  - name: Gather facts from GRID
+    netapp.storagegrid.na_sg_grid_info:
+      api_url: "{{ 172.30.171.140 }}"
+      auth_token: "{{ gridauth.json.data }}"
+      validate_certs: false
+    register: grid_info
+
+  - name: Save GRID facts to YAML file
+    delegate_to: localhost
+    copy:
+        content: "{{ grid_info | to_nice_yaml }}"
+        dest: "./grid_sg_facts.yml"
+
+...

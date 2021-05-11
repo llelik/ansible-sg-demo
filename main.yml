@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  collections:
+    - netapp.storagegrid
+  vars_files:
+    vars/defaults.yml
+  gather_facts: no
+  tasks:
+  - name: Retrieve SG auth token
+    uri:
+      url: "{{ sgadmin_url }}/api/v3/authorize"
+      method: POST
+      body: {
+        "username": "{{ sgadmin_user }}",
+        "password": "{{ sgadmin_pwd }}",
+        "cookie": false,
+        "csrfToken": false
+      }
+      body_format: json
+      validate_certs: false
+    register: gridauth
+    tags: gridauth
+
+  - name: Create SG tenant
+    na_sg_grid_account:
+      api_url: "{{ sgadmin_url }}"
+      auth_token: "{{ gridauth.json.data }}"
+      validate_certs: false
+      state: present 
+      name: "{{ tenant_acc }}"
+      protocol: "{{ tenant_proto }}"
+      management: true
+      use_own_identity_source: false
+      allow_platform_services: false
+      password: "{{ tenant_pwd }}"
+      quota_size: "{{ tenant_qs }}"
+      update_password: always
+    register: account 
+
+...

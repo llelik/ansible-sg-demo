@@ -1,0 +1,493 @@
+changed: 'False'
+failed: false
+sg_info:
+    grid/accounts:
+        apiVersion: '3.3'
+        data:
+        -   capabilities:
+            - s3
+            - management
+            id: '82316967111707306924'
+            name: it-dept
+            policy:
+                allowPlatformServices: false
+                quotaObjectBytes: 107374182400
+                useAccountIdentitySource: false
+        responseTime: '2021-04-22T10:11:47.802Z'
+        status: success
+    grid/alarms:
+        apiVersion: '3.3'
+        data: []
+        responseTime: '2021-04-22T10:11:47.832Z'
+        status: success
+    grid/audit:
+        apiVersion: '3.3'
+        data:
+            levels:
+                clientReads: normal
+                clientWrites: normal
+                management: debug
+                storage: error
+                system: normal
+            loggedHeaders: []
+        responseTime: '2021-04-22T10:11:47.909Z'
+        status: success
+    grid/compliance-global:
+        apiVersion: '3.3'
+        data:
+            complianceEnabled: false
+        responseTime: '2021-04-22T10:11:47.976Z'
+        status: success
+    grid/config:
+        apiVersion: '3.3'
+        data:
+            auto-logout: 900
+            deactivatedFeatures: {}
+            permissions:
+                rootAccess: true
+            restrictedPort: false
+            token:
+                expires: '2021-04-23T02:11:46.000Z'
+            user:
+                federated: false
+                firstName: Root
+                fullName: Root
+                id: 00000000-0000-0000-0000-000000000000
+                uniqueName: root
+                username: root
+        responseTime: '2021-04-22T10:11:48.014Z'
+        status: success
+    grid/config/management:
+        apiVersion: '3.3'
+        data:
+            minApiVersion: 2
+        responseTime: '2021-04-22T10:11:48.085Z'
+        status: success
+    grid/config/product-version:
+        apiVersion: '3.3'
+        data:
+            productVersion: 11.5.0-20210308.2018.28b1420
+        responseTime: '2021-04-22T10:11:48.155Z'
+        status: success
+    grid/deactivated-features:
+        apiVersion: '3.3'
+        data:
+            grid: null
+            tenant: null
+        responseTime: '2021-04-22T10:11:48.183Z'
+        status: success
+    grid/dns-servers:
+        apiVersion: '3.3'
+        data:
+        - 192.168.0.253
+        responseTime: '2021-04-22T10:11:48.248Z'
+        status: success
+    grid/domain-names:
+        apiVersion: '3.3'
+        data:
+        - s3.notmy.com
+        - s3.com
+        responseTime: '2021-04-22T10:11:48.317Z'
+        status: success
+    grid/ec-profiles:
+        apiVersion: '3.3'
+        data: []
+        responseTime: '2021-04-22T10:11:48.342Z'
+        status: success
+    grid/expansion:
+        apiVersion: '3.3'
+        data:
+            configured: false
+            endTime: null
+            error: null
+            id: expansion
+            inProgress: false
+            provision:
+                complete: false
+                error: null
+                inProgress: false
+                locked: false
+            stages: []
+            startTime: null
+            user:
+                fullName: null
+                username: null
+        responseTime: '2021-04-22T10:11:48.408Z'
+        status: success
+    grid/expansion/nodes:
+        apiVersion: '3.3'
+        data: []
+        responseTime: '2021-04-22T10:11:48.479Z'
+        status: success
+    grid/expansion/sites:
+        apiVersion: '3.3'
+        data: []
+        responseTime: '2021-04-22T10:11:48.508Z'
+        status: success
+    grid/grid-networks:
+        apiVersion: '3.3'
+        data:
+        - 192.168.0.0/24
+        readOnly: false
+        responseTime: '2021-04-22T10:11:48.579Z'
+        status: success
+    grid/groups:
+        apiVersion: '3.3'
+        data: []
+        responseTime: '2021-04-22T10:11:48.654Z'
+        status: success
+    grid/health:
+        apiVersion: '3.3'
+        data:
+            alarms:
+                critical: 0
+                major: 0
+                minor: 0
+                notice: 0
+            alerts:
+                critical: 0
+                major: 0
+                minor: 0
+            nodes:
+                administratively-down: 0
+                connected: 4
+                unknown: 0
+        responseTime: '2021-04-22T10:11:48.718Z'
+        status: success
+    grid/health/topology:
+        apiVersion: '3.3'
+        data:
+            children:
+            -   children:
+                -   id: 50b00c45-8433-4a06-b2af-d94b400b501f
+                    name: dc1-adm1
+                    oid: 2.16.124.113590.2.1.672987.1.1.1.1
+                    severity: normal
+                    state: connected
+                    type: node
+                    uniqueName: dc1-adm1
+                -   id: fffa4f4b-3667-46b0-ba00-96319ea9deda
+                    name: dc1-s1
+                    oid: 2.16.124.113590.2.1.672987.1.1.1.2
+                    severity: normal
+                    state: connected
+                    type: node
+                    uniqueName: dc1-s1
+                -   id: f2bf2992-95a8-40c1-90bf-5308e5873be3
+                    name: dc1-s2
+                    oid: 2.16.124.113590.2.1.672987.1.1.1.3
+                    severity: normal
+                    state: connected
+                    type: node
+                    uniqueName: dc1-s2
+                -   id: 177004dc-df52-44cf-a37c-f782d6c83374
+                    name: dc1-s3
+                    oid: 2.16.124.113590.2.1.672987.1.1.1.4
+                    severity: normal
+                    state: connected
+                    type: node
+                    uniqueName: dc1-s3
+                id: 5c950005-07d0-4fab-a0ab-be085b5fa8cc
+                name: Data Center 1
+                oid: 2.16.124.113590.2.1.672987.1.1.1
+                severity: normal
+                state: connected
+                type: site
+                uniqueName: Data Center 1
+            id: 758c9085-2858-42e4-b6ea-c9abc4a1c71b
+            name: MyGrid
+            oid: 2.16.124.113590.2.1.672987.1.1
+            severity: normal
+            state: connected
+            type: grid
+            uniqueName: MyGrid
+        responseTime: '2021-04-22T10:11:48.742Z'
+        status: success
+    grid/identity-source:
+        apiVersion: '3.3'
+        data:
+            baseGroupDn: ''
+            baseUserDn: ''
+            caCert: ''
+            disable: true
+            disableTLS: false
+            enableLDAPS: false
+            hostname: ''
+            id: ea7147b5-2a9a-49e5-a414-b4af6f674f72
+            ldapServiceType: ''
+            password: null
+            port: 0
+            type: ''
+            username: ''
+        responseTime: '2021-04-22T10:11:48.821Z'
+        status: success
+    grid/ilm-criteria:
+        apiVersion: '3.3'
+        data:
+        -   id: ingestTime
+            operators:
+            - equals
+            - notEquals
+            - lessThan
+            - lessThanOrEquals
+            - greaterThan
+            - greaterThanOrEquals
+            type: integer
+            unit: us
+        -   id: lastAccessTime
+            operators:
+            - equals
+            - notEquals
+            - lessThan
+            - lessThanOrEquals
+            - greaterThan
+            - greaterThanOrEquals
+            - exists
+            - notExists
+            type: integer
+            unit: us
+        -   id: locationConstraint
+            operators:
+            - equals
+            - notEquals
+            type: string
+        -   id: objectSize
+            operators:
+            - equals
+            - notEquals
+            - lessThan
+            - lessThanOrEquals
+            - greaterThan
+            - greaterThanOrEquals
+            type: integer
+            unit: bytes
+        -   id: s3Key
+            operators:
+            - equals
+            - notEquals
+            - contains
+            - notContains
+            - startsWith
+            - notStartsWith
+            - endsWith
+            - notEndsWith
+            type: string
+        -   id: tag
+            operators:
+            - contains
+            - endsWith
+            - equals
+            - exists
+            - notContains
+            - notEndsWith
+            - notEquals
+            - notExists
+            - notStartsWith
+            - startsWith
+            type: string
+        -   id: userMetadata
+            operators:
+            - contains
+            - endsWith
+            - equals
+            - exists
+            - notContains
+            - notEndsWith
+            - notEquals
+            - notExists
+            - notStartsWith
+            - startsWith
+            type: string
+        responseTime: '2021-04-22T10:11:48.887Z'
+        status: success
+    grid/ilm-policies:
+        apiVersion: '3.3'
+        data:
+        -   activationTime: '2021-03-31T20:51:30.000Z'
+            defaultRule: r2
+            id: 00000000-0000-0000-0000-000000000000
+            name: Baseline 2 Copies Policy
+            reason: null
+            rules:
+            - r2
+        responseTime: '2021-04-22T10:11:48.953Z'
+        status: success
+    grid/ilm-rules:
+        apiVersion: '3.3'
+        data:
+        -   displayName: Make 2 Copies
+            filters: []
+            id: r2
+            ingestBehavior: dual-commit
+            placements:
+            -   replicated:
+                -   copies: 2
+                    poolId: p1
+                retention:
+                    after: 0
+            referenceTime: ingestTime
+            schemaVersion: '1.0'
+            version: '1.0'
+        responseTime: '2021-04-22T10:11:48.979Z'
+        status: success
+    grid/license:
+        alerts:
+        -   key: maintenance.license.compliance.for_test
+            severity: warning
+            text: This is an unsupported license and does not provide any support
+                entitlement for this product.
+        apiVersion: '3.3'
+        data:
+            license: eyJzdGF0dXNSZXNwIjp7InN0YXR1c0NvZGUiOiJTMDA3IiwibWVzc2FnZSI6IlN1Y2Nlc3MiLCJzblN0YXR1cyI6IkFjdGl2ZSIsIndhcnJhbnR5U3RhcnQiOiIyMDE2LTAxLTAxIiwid2FycmFudHlFbmQiOiIyMDE2LTAxLTAyIiwiY21hdElEIjoiNTAwMTY0MiIsImNvbXBhbnlCUElEIjoiMDAwMTAzMjc2NyIsInNpdGVCUElEIjoiMDAwMTM1MDQ5MSIsImNvbnRyYWN0U3RhcnQiOiIyMDE2LTAxLTAxIiwiY29udHJhY3RFbmQiOiIyMDE2LTAxLTAyIiwidmVyc2lvbiI6IjEiLCJzZXJpYWxOdW1iZXIiOiIwMDAwMDAiLCJsaWNlbnNlcyI6eyJ0eXBlIjoiY2FwYWNpdHkiLCJwYWNrYWdlIjoiU0ctV0VCU0NBTEUiLCJjYXBhY2l0eSI6IjAiLCJlbmREYXRlIjoiMjAxNi0wMS0wMSJ9fSwiU2lnbmF0dXJlIjoiUG5kdWQ0RGZWd2ppL0VBU3VWNXhQcU5MbWVwdndmRlQ1a0NMc2tzZEtOK0l3Z0tvdGE2VG0xemRNY1V6T01xTHFCZTFwS2QzR1JybzFVQjJpRlJWMlVwalp2V2JaOHhBWDU0NVBQb0VNNFNsNFQydks3ZGhBd2pCTTlXMS8yNmxWMjVHVU1wSjFabjc2VUtDWWRieFdJSjVrSXplTHFJRVVKOWZGRG1aRWxiV01DTXV0czBvcW9KRWlCbFFOUUpBQytVekZhOGZxalk2K3Rhakc2WkN1dE1kWTlYYnI4b3c4RTNrekFpK2oxcmR6c092ODY3ZjMyZDdCdFBFWVg4NGZiUlVETHMzdHZub1JIcGdFbnF3U2tlWmZZekNzRTRLZ0lodmFXV0MyakRQUkUvMytRMUNLV1B5dUhSd01jVmd4d2F5ME1ab0lFMWJpSW1PRDVXSmZRPT0iLCJ0cmFja2luZ0lkIjoiZDA1ZTU5MmQtZjM0MC00N2E1LWE5ZjYtNGJmNDVjZGMzYTEyIn0=
+            licenseCapacity: 0
+            licenseEnd: '2016-01-01'
+            licensePackage: SG-WEBSCALE
+            licenseSerialNumber: '000000'
+            licenseType: capacity
+            supportEnd: '2016-01-02'
+            systemId: 758c9085-2858-42e4-b6ea-c9abc4a1c71b
+        readOnly: false
+        responseTime: '2021-04-22T10:11:49.050Z'
+        status: success
+    grid/management-certificate:
+        apiVersion: '3.3'
+        data:
+            caBundleEncoded: null
+            serverCertificateEncoded: null
+        responseTime: '2021-04-22T10:11:49.081Z'
+        status: success
+    grid/ntp-servers:
+        apiVersion: '3.3'
+        data:
+        - 192.168.0.9
+        readOnly: false
+        responseTime: '2021-04-22T10:11:49.157Z'
+        status: success
+    grid/recovery:
+        apiVersion: '3.3'
+        data:
+            id: recovery
+            inProgress: false
+            nodeInRecovery: null
+            recoveredNodes: []
+            startTime: null
+            user:
+                fullName: null
+                username: null
+        responseTime: '2021-04-22T10:11:49.181Z'
+        status: success
+    grid/recovery/available-nodes:
+        apiVersion: '3.3'
+        data: []
+        responseTime: '2021-04-22T10:11:49.248Z'
+        status: success
+    grid/regions:
+        apiVersion: '3.3'
+        data:
+        - us-east-1
+        responseTime: '2021-04-22T10:11:49.274Z'
+        status: success
+    grid/schemes:
+        apiVersion: '3.3'
+        data:
+        -   gridNodeRedundancy: 3
+            id: '1'
+            name: 6+3
+            storageOverhead: 50
+        -   gridNodeRedundancy: 2
+            id: '2'
+            name: 8+2
+            storageOverhead: 25
+        -   gridNodeRedundancy: 3
+            id: '3'
+            name: 9+3
+            storageOverhead: 33
+        -   gridNodeRedundancy: 1
+            id: '4'
+            name: 2+1
+            storageOverhead: 50
+        -   gridNodeRedundancy: 2
+            id: '5'
+            name: 4+2
+            storageOverhead: 50
+        -   gridNodeRedundancy: 2
+            id: '6'
+            name: 6+2
+            storageOverhead: 33
+        -   gridNodeRedundancy: 1
+            id: '7'
+            name: 4+1
+            storageOverhead: 25
+        -   gridNodeRedundancy: 1
+            id: '8'
+            name: 6+1
+            storageOverhead: 16
+        -   gridNodeRedundancy: 5
+            id: '9'
+            name: 7+5
+            storageOverhead: 71
+        responseTime: '2021-04-22T10:11:49.361Z'
+        status: success
+    grid/snmp:
+        apiVersion: '3.3'
+        data:
+            agent_addresses: null
+            authtrapenable: null
+            community_strings: null
+            disable_notifications: null
+            enable_snmp: null
+            rousers: null
+            sysContact: null
+            sysLocation: null
+            trap_destinations: null
+            trapcommunity: null
+            usm_users: null
+        responseTime: '2021-04-22T10:11:49.388Z'
+        status: success
+    grid/storage-api-certificate:
+        apiVersion: '3.3'
+        data:
+            caBundleEncoded: null
+            serverCertificateEncoded: null
+        responseTime: '2021-04-22T10:11:49.457Z'
+        status: success
+    grid/untrusted-client-network:
+        apiVersion: '3.3'
+        data:
+            default: null
+            untrustedNodes: null
+        responseTime: '2021-04-22T10:11:49.482Z'
+        status: success
+    grid/users:
+        apiVersion: '3.3'
+        data:
+        -   accountId: '0'
+            disable: false
+            federated: false
+            fullName: Root
+            id: 00000000-0000-0000-0000-000000000000
+            memberOf: null
+            uniqueName: root
+            userURN: urn:sgws:identity::0:root
+        responseTime: '2021-04-22T10:11:49.558Z'
+        status: success
+    grid/users/root:
+        apiVersion: '3.3'
+        data:
+            accountId: '0'
+            disable: false
+            federated: false
+            fullName: Root
+            id: 00000000-0000-0000-0000-000000000000
+            memberOf: null
+            uniqueName: root
+            userURN: urn:sgws:identity::0:root
+        responseTime: '2021-04-22T10:11:49.595Z'
+        status: success
+    versions:
+        apiVersion: '3.3'
+        data:
+        - 2
+        - 3
+        responseTime: '2021-04-22T10:11:49.654Z'
+        status: success

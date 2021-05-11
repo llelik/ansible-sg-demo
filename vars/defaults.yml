@@ -1,0 +1,16 @@
+---
+sgadmin_url: https://cbc-sgdemo-adm
+sgadmin_user: root
+sgadmin_pwd: ""
+tenant_acc: ""
+tenant_pwd: ""
+tenant_user: root
+tenant_proto: s3
+tenant_qs: 10
+priv_users:
+  - Boss
+  - devops-eng
+regular_users:
+  - coder1
+  - coder2
+...

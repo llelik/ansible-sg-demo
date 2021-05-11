@@ -1,0 +1,27 @@
+---
+#General
+domain: 'muccbc.hq.netapp.com'
+
+#VMWare Specific
+vcenter_hostname: 'cbc-vcenter01.muccbc.hq.netapp.com'
+vcenter_datacenter: 'MUCCBC'
+vcenter_cluster: 'CBC-Demo_UCS'
+vsphere_user: '' 
+vsphere_password: ''
+
+vcenter_linux_datastores: 
+  - 'cbc_esxi_prod_lnx_ds_01'
+  - 'cbc_esxi_prod_lnx_ds_02'
+  - 'cbc_esxi_prod_lnx_ds_03'
+vcenter_windows_datastores: 
+  - 'cbc_esxi_prod_win_ds_01'
+  - 'cbc_esxi_prod_win_ds_02'
+  - 'cbc_esxi_prod_win_ds_03'
+esxi_hosts:
+  - 'cbc-esxi201.muccbc.hq.netapp.com'
+  - 'cbc-esxi204.muccbc.hq.netapp.com'
+  - 'cbc-esxi205.muccbc.hq.netapp.com'
+
+#oVirt Specific
+ovirt_cluster: "NetApp_HCI_Broadwell"
+

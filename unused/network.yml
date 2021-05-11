@@ -1,0 +1,39 @@
+---
+
+- hosts: localhost
+  collections:
+    - netapp.storagegrid
+  vars_files:
+    vars/defaults.yml
+  gather_facts: no
+  tasks:
+  - name: Retrieve SG auth token
+    uri:
+      url: "{{ sgadmin_url }}/api/v3/authorize"
+      method: POST
+      body: {
+        "username": "{{ sgadmin_user }}",
+        "password": "{{ sgadmin_pwd }}",
+        "cookie": false,
+        "csrfToken": false
+      }
+      body_format: json
+      validate_certs: false
+    register: gridauth
+    tags: gridauth
+
+  - name: Add trusted netwoks via REST
+    uri:
+      url: "{{ sgadmin_url }}api/v3/grid/grid-networks/update"
+      method: POST
+      body_format: json
+      headers:
+        Authorization: "{{ gridauth.json.data }}"
+      body: { 
+        "passphrase": "XXX",
+        "subnets": [ "192.168.1.0/24" ]
+      }
+      validate_certs: false
+    register: net_response
+    tags: netadd
+...

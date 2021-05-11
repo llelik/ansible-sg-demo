@@ -1,0 +1,11 @@
+---
+- hosts: alexeym-lnx233
+  tasks:
+  - name: Temporary host
+    add_host: 192.168.233.233
+  - name: Copy keys to management host
+    copy:
+      content: "{{ keydata |to_nice_yaml}}"
+      dest: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}_s3_keys.txt"
+                         
+...

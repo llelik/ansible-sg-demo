@@ -1,0 +1,98 @@
+---
+- hosts: localhost
+  collections:
+    - netapp.storagegrid
+  vars_files:
+    vars/defaults.yml
+  gather_facts: no
+  tasks:
+  - name: Get user authorization token
+    uri:
+      url: "{{ sgadmin_url }}/api/v3/authorize"
+      method: POST
+      body: {
+        "accountId": "{{ account_id }}",
+        "username": "{{ tenant_user }}",
+        "password": "{{ tenant_pwd }}",
+        "cookie": false,
+        "csrfToken": false
+      }
+      body_format: json
+      validate_certs: false
+    register: auth
+    tags: tauth
+
+  - name: Create privileged group
+    na_sg_org_group:
+      api_url: "{{ sgadmin_url }}"
+      auth_token: "{{ auth.json.data }}"
+      validate_certs: false
+      state: present
+      display_name: "{{ new_priv_group }}"
+      unique_name: "group/{{ new_priv_group }}"
+      management_policy:
+        manage_all_containers: true
+        manage_endpoints: true
+        manage_own_s3_credentials: true
+        root_access: false
+      s3_policy: {"Statement":[{"Effect":"Allow","Action":"s3:*","Resource":"arn:aws:s3:::*"}]}
+ 
+  - name: Create priv users
+    na_sg_org_user:
+      api_url: "{{ sgadmin_url }}"
+      auth_token: "{{ auth.json.data }}"
+      validate_certs: false
+      state: present
+      full_name: "{{ item }}"
+      unique_name: "user/{{ item }}"
+      member_of: "group/{{ new_priv_group }}"
+    with_items: "{{ priv_users.split('\n') }}"
+
+  - name: Create regular group
+    na_sg_org_group:
+      api_url: "{{ sgadmin_url }}"
+      auth_token: "{{ auth.json.data }}"
+      validate_certs: false
+      state: present
+      display_name: "{{ new_group }}"
+      unique_name: "group/{{ new_group }}"
+      management_policy:
+        manage_all_containers: true #false
+        manage_endpoints: true
+        manage_own_s3_credentials: true
+        root_access: false
+      s3_policy: {"Statement":[{"Effect":"Allow","Action":"s3:*","Resource":"arn:aws:s3:::*"}]}
+    tags: group
+
+  - name: Create regular users
+    na_sg_org_user:
+      api_url: "{{ sgadmin_url }}"
+      auth_token: "{{ auth.json.data }}"
+      validate_certs: false
+      state: present
+      full_name: "{{ item }}"
+      unique_name: "user/{{ item }}"
+      member_of: "group/{{ new_group }}"
+    with_items: "{{ regular_users.split('\n') }}"
+
+  - name: Create s3 key for all users
+    na_sg_org_user_s3_key:
+      api_url: "{{ sgadmin_url }}"
+      auth_token: "{{ auth.json.data }}"
+      validate_certs: false
+      state: present
+      unique_user_name: "user/{{ item }}"
+    with_items: 
+      - "{{ regular_users.split('\n') }}"
+      - "{{ priv_users.split('\n') }}"
+    register: keydata
+ 
+  - name: Create a s3 bucket
+    na_sg_org_container:
+      api_url: "{{ sgadmin_url }}"
+      auth_token: "{{ auth.json.data }}"
+      validate_certs: false
+      state: present
+      name: "{{ bucket_name }}"
+
+...

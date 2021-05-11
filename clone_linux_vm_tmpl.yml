@@ -1,0 +1,141 @@
+---
+- hosts: 127.0.0.1
+  gather_facts: false
+  connection: local
+
+# Requirements:
+# python >= 2.6
+# PyVmomi
+
+  vars_files:
+ #   - ../accounts.yml
+    - vars/var_cbc_hypervisors.yml
+
+  vars:
+    vm_note: 'Created by Ansible'
+    vm_net1: 'v172_client'
+    need_banner: false
+    eth0_netmask: '255.255.0.0'
+    eth0_gateway: '172.30.0.1'
+    vm_net2: 'v192_data'
+    eth1_netmask: '255.255.0.0'
+    ansible_host_group: 'CentOS_User_VMs'
+    guest_id: 'centos64Guest'
+    host_vars: '/etc/ansible/host_vars'
+    folder: '/vm/Users/'
+    gui: 'none'
+    domain: 'muccbc.hq.netapp.com'
+    OS: 'CentOS'
+    OS_Version: '7.7'
+    tz_code: 110
+    install_packages: "install-s3cmd"
+#alexeym extra vars
+    vm_user: "alexeym"
+    vm_name: "alexeym-lnx"
+    eth0_ip: '172.30.233.225'
+    eth1_ip: '192.168.233.225'
+    memory_mb: '12000'
+    num_cpus: '2'
+  
+
+########TASKS ################################################################
+  tasks:
+#  - name: Install PyVmomi with pip
+#    pip:
+#      name: PyVmomi
+#      state: latest
+
+  - name: Set Facts - ESX Host
+    set_fact:
+      esxi_host: '{{ esxi_hosts|random }}'
+
+  - name: Set Facts - ESX Datastore
+    set_fact:
+      vcenter_datastore: '{{ vcenter_linux_datastores|random }}'
+
+  - name: Set CentOS Facts
+    set_fact:
+      template_hostname: 'alexeym-tmpl'
+      ansible_host_group: 'CentOS_User_VMs'
+      guest_id: 'centos8_64Guest'
+#    when: OS is search("CentOS") and OS_Version is search("7.")
+          
+
+  - name: Set CentOS 8 Facts
+    set_fact:
+      template_hostname: '{{ OS }}_{{ OS_Version }}_t'
+      ansible_host_group: 'CentOS_User_VMs'
+      guest_id: 'centos8_64Guest'
+    when: OS is search("CentOS") and OS_Version is search("8.")
+
+# get date
+  - set_fact: creationdate="{{lookup('pipe','date "+%Y/%m/%d %H:%M"')}}"
+
+  - name: Create a folder for the user if not present 
+    vcenter_folder:
+      hostname: '{{ vcenter_hostname }}'
+      username: '{{ vsphere_user }}'
+      password: '{{ vsphere_password }}'
+      datacenter: '{{ vcenter_datacenter }}'
+      validate_certs: no
+      parent_folder: 'Users'
+      folder_name: '{{ vm_user }}'
+      state: present
+    register: sub_folder_creation_result
+    delegate_to: localhost
+
+  - debug: var=sub_folder_creation_result
+
+# Create a VM from a template
+  - name: create the VM
+    vmware_guest:
+      hostname: '{{ vcenter_hostname }}'
+      username: '{{ vsphere_user }}'
+      password: '{{ vsphere_password }}'
+      datacenter: '{{ vcenter_datacenter }}'
+      validate_certs: no
+      esxi_hostname: '{{ esxi_host }}'
+      folder: '{{ folder }}{{ vm_user }}'
+      name: '{{ vm_name }}'
+      state: poweredon
+      guest_id: '{{ guest_id }}'
+      annotation: "{{ vm_note }} {{ vm_user }} - {{ creationdate }}"
+      networks:
+      - name: '{{ vm_net1 }}'
+        ip: '{{ eth0_ip }}'
+        netmask: '{{ eth0_netmask }}'
+        gateway: '{{ eth0_gateway }}'
+        dns_servers:
+        - 10.65.56.5
+        - 10.65.56.6
+        start_connected: true
+      - name: '{{ vm_net2 }}'
+        ip: '{{ eth1_ip }}'
+        netmask: '{{ eth1_netmask }}'
+        start_connected: true
+      hardware:
+        memory_mb: '{{ memory_mb }}'
+        num_cpus: '{{ num_cpus }}'
+      customization:
+        #timezone: '{{ tz_code }}'
+        dns_servers:
+        - 10.65.56.5
+        - 10.65.56.6
+        domain: '{{ domain }}'
+        hostname: '{{ vm_name }}'
+        orgname: NetApp
+      template: '{{ template_hostname }}'
+      wait_for_ip_address: yes
+    delegate_to: localhost
+
+  - name: Add host to group
+    add_host:
+      name: '{{ eth0_ip }}'
+      groups: Linux_Users
+      eth0_ipv4address: '{{ eth0_ip }}'
+      cbc_server_type: "User VM"
+
+  - name: "Wait for SSH banners"
+    local_action: wait_for port=22 host="{{ eth0_ip }}" search_regex=OpenSSH delay=5
+    become: False
+
